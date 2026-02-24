@@ -21,12 +21,31 @@
         *{
             font-family: "Geist", sans-serif;
         }
+        body{
+            padding-bottom: 50px;
+            background-color: #f8fafc;
+        }
+
+        @media(max-width: 1200px){
+           header,main{
+             width: 90%;
+             margin: auto;
+           }
+
+        }
+        @media(max-width: 600px){
+           header,main{
+             width: 95%;
+             margin: auto;
+           }
+
+        }
     </style>
   </head>
-  <body class="bg-[#f8fafc]">
+  <body>
 
     <!-- header section -->
-    <header class="w-[65%] mx-auto border-b-2 border-[#e6e7e9]">
+    <header class=" md:w-[65%] mx-auto border-b-2 border-[#e6e7e9]">
       <h1 class="text-[32px] text-[#002C5C] font-bold pt-[60px]">Job Application Tracker</h1>
 
       <div class="headerGrids grid grid-cols-3 gap-6 rounded-md">
@@ -61,10 +80,22 @@
         
         <!-- toggle buttons -->
         <div class="toggleButtons space-x-3 pb-5">
-            <button onclick="toggleStyle('all-filter-btn')" class="text-white bg-[#3b82f6] btn w-[80px]" id="all-filter-btn">All</button>
+            <button onclick="toggleStyle('all-filter-btn')" class="text-[#64748b] bg-white btn w-[80px]" id="all-filter-btn">All</button>
             <button onclick="toggleStyle('interview-filter-btn')" class="text-[#64748b] bg-white btn w-[80px]" id="interview-filter-btn">Interview</button>
             <button onclick="toggleStyle('rejected-filter-btn')" class="text-[#64748b] bg-white btn w-[80px]" id="rejected-filter-btn">Rejected</button>
         </div>
+
+
+
+
+        <!-- no jobs available section -->
+
+        <section class="noJobsAvailableSection flex justify-center items-center flex-col bg-white py-[150px]" id="noJobsAvailableSection">
+            <img src="./jobs.png" alt="">
+            <h1 class="text-[24px] font-semibold text-[#002C5C]">No jobs available</h1>
+            <p class="text-[#64748B] text-[16px]">Check back soon for new job opportunities</p>
+
+        </section>
 
 
 
@@ -73,9 +104,9 @@
         <section id="filtered-section" class="hidden">
         </section>
 
-        <section class="cardSection space-y-5 pb-5" id="cardSection">
+        <section class="cardSection space-y-5 pb-5 hidden" id="cardSection">
             <!-- card 1 -->
-            <div class="card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row">
+            <div id="card1" class="card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row">
                 
                 <!-- main div -->
                 <div class="space-y-4">
@@ -107,13 +138,13 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
 
             <!-- card 2 -->
-            <div class="card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row">
+            <div id="card2" class="card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row">
                 
                 <!-- main div -->
                 <div class="space-y-4">
@@ -144,8 +175,8 @@
                 </div>
 
                 <!-- delete button -->
-                <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+               <div class="relative top-2">
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -184,7 +215,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -222,7 +253,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -259,7 +290,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -296,7 +327,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -333,7 +364,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 
@@ -371,7 +402,7 @@
 
                 <!-- delete button -->
                 <div class="relative top-2">
-                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="rounded-full border border-[#f1f2f4] w-[40px] h-[40px] text-[#64748b] cursor-pointer"><span class="card-delete-btn"><i class="fa-regular fa-trash-can"></i></span></button>
                 </div>
             </div>
 

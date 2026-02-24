@@ -18,11 +18,21 @@ const mainContainer = document.querySelector(".mainSection");
 const filterSection = document.getElementById("filtered-section")
 
 
+// defult page
+const noJobsAvailableSection = document.getElementById("noJobsAvailableSection");
+
+allFilterBtn.addEventListener("click", function(){
+    noJobsAvailableSection.classList.add("hidden");
+})
+
+
 function calculateCount(){ 
     total.innerText = allCardSection.children.length;
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 }
+
+
 
 // top small job status
 
@@ -90,6 +100,31 @@ function toggleStyle(id){
 
 // event delegation
 mainContainer.addEventListener("click", function(event){
+
+    // delete button
+     if(event.target.closest('.card-delete-btn')) {
+        const card = event.target.closest(".card");
+        const institueName = card.querySelector(".institueName").innerText;
+
+        // remove card from DOM
+        card.remove();
+
+        // remove from lists
+        interviewList = interviewList.filter(item => item.institueName != institueName);
+        rejectedList = rejectedList.filter(item => item.institueName != institueName);
+
+        calculateCount();
+        updateJobStatus();
+
+        if(currentStatus === 'interview-filter-btn'){
+            renderInterview();
+        } else if(currentStatus === 'rejected-filter-btn'){
+            renderRejected();
+        }
+        return; // stop further execution
+    }
+
+
 if(event.target.classList.contains('interviewBtn')){
 
     const parentNode = event.target.parentNode.parentNode;
@@ -193,7 +228,7 @@ function renderInterview(){
 
     for(let interview of interviewList){
         let div = document.createElement('div');
-        div.className = 'card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row';
+        div.className = 'card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row mb-5';
         div.innerHTML =
         `
                          <!-- main div -->
@@ -240,7 +275,7 @@ function renderRejected(){
 
     for(let rejected of rejectedList){
         let div = document.createElement('div');
-        div.className = 'card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row';
+        div.className = 'card bg-white rounded-md p-6 border border-[#f1f2f4] flex justify-between flex-row mb-5';
         div.innerHTML =
         `
                          <!-- main div -->
